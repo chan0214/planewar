@@ -1,0 +1,729 @@
+@charset "UTF-8";
+
+/**
+ *
+ *样式初始*/
+body{margin: 0; font-size: 12px; line-height: 1.5; color: #ffffff; background-color: #fff; user-select: none;-moz-user-select: none;}
+p{margin: 0}
+ul,ol{margin: 0; padding: 0}
+ul,ol { list-style: none outside none; }
+table { border-collapse: collapse; border-spacing: 0; }
+td,th { padding: 0;}
+input, button{ outline: none; border: none;}
+button { padding:0;}
+
+
+
+
+
+/**
+ *
+ *公共样式*/
+.box{ /*最外层*/
+    position: absolute;
+    left: calc(50% - 480px);
+    top: calc(50% - 300px);
+    width: 960px;
+    height: 600px;
+    border: 1px solid silver;
+    box-shadow: 0 0 10px black;
+    overflow: hidden;
+}
+.board{ /*版块*/
+    overflow: hidden;
+    position: absolute;
+    top: 0;left: 0;
+    background: url("../image/bj.png");
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: auto;
+    transition: .35s;
+}
+.game-content{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.showBoard{ opacity: 1; z-index: 1} /*显示要展现的版块*/
+.fl { float: left; } /*左浮动*/
+.fr { float: right; } /*右浮动*/
+.clearfix:before,.clearfix:after { content: ""; display: table; }/*清除浮动*/
+.clearfix:after { clear: both; }
+
+
+
+
+
+/**
+ *
+ *游戏介绍*/
+.desc-screen{ /*背景边框*/
+    overflow: hidden;
+    background: url("../image/descFrame.png") center center no-repeat;
+    height: 460px;
+    margin-top: 10px;
+}
+.desc-title{ /*标题背景图*/
+    background: url("../image/descTit.png") no-repeat;
+    width: 348px;
+    height: 88px;
+    margin: 20px auto 0;
+    line-height: 70px;
+    font-size: 32px;
+    text-align: center;
+}
+.desc-btn{ /*菜单栏样式*/
+    position: absolute;
+    left: calc(50% - 300px);
+    bottom: -120px;
+    background-color: rgba(255,255,255,.2);
+    width: 600px;
+    height: 120px;
+    border:2px solid #3f4b57;
+    border-radius: 6px;
+    box-sizing: border-box;
+    text-align: center;
+    transition: .3s;
+}
+.desc-btn > i{ /*按钮居中辅助*/
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.desc-btn > span{ /*按钮样式*/
+    display: inline-block;
+    position: relative;
+    background: url("../image/descBtn.png") center center no-repeat;
+    width: 224px;
+    height: 80px;
+    line-height: 90px;
+    font-size: 26px;
+    text-shadow: 0 3px 3px #000000;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.desc-btn > span:after{
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 14px;
+    width: 0;
+    height: 70%;
+    background-color: #fff;
+    opacity: 1;
+}/*按钮涟绮特效*/
+.desc-btn > span:active:after{
+    width: 100%;
+    left: 0;
+    opacity: 0;
+    transition: .35s
+}/*按钮涟绮特效*/
+.desc-btn > span:hover{ /*按钮背景切换*/
+    background: url("../image/descBtnHover.png") center center no-repeat;
+}
+.desc:hover > .desc-btn{ /*菜单栏上移动画*/
+    bottom: 0;
+    transition: .3s;
+}
+
+.show-desc{ /*介绍信息组样式*/
+    position: absolute;
+    margin-left: 130px;
+}
+.show-desc > li{ /*列表li*/
+    margin-top: 8px;
+}
+.show-desc > li > span{ /*列表li里span样式*/
+    display: inline-block;
+    font-size: 22px;
+    color : #86b5ef;
+}
+.show-desc > li > *:after{ /*给每个li一个伪元素*/
+    content: attr(data-desc);
+    position: absolute;
+    left: 110%;
+    width: 532px;
+    text-align: left;
+}
+
+.group-1{ /*第一组信息动画分配*/
+    animation: desc-group1 15s infinite;
+}
+.group-1 > li:nth-child(1) > span{ /*一组第一行添背景*/
+    background: url("../image/fj.png");
+    width: 54px;
+    height: 80px;
+}
+.group-1 > li:nth-child(2) > span{ /*一组第二行添背景*/
+    background: url("../image/enemyAircraft.png");
+    width: 44px;
+    height: 74px;
+}
+.group-1 > li:nth-child(3) > span{ /*一组第三行添背景*/
+    background: url("../image/friends.png");
+    width: 50px;
+    height: 60px;
+}
+
+
+.group-2 { /*第二组信息动画分配*/
+    margin-top: 40px;
+    text-align: center;
+    animation: desc-group2 15s linear infinite;
+}
+.group-2 > li > span{
+    vertical-align: middle;
+}
+.group-2 > li:nth-child(1) > span{ /*二组第一行添背景*/
+    background: url("../image/time.png");
+    width: 177px;
+    height: 66px;
+}
+.group-2 > li:nth-child(2) > span{ /*二组第二行添背景*/
+    background: url("../image/yx.png");
+    width: 37px;
+    height: 30px;
+}
+.group-2 > li:nth-child(3) > span{ /*二组第三行添背景*/
+    background: url("../image/fuelNum.png");
+    width: 183px;
+    height: 47px;
+    margin-top: 30px;
+}
+
+.group-3 { /*第三组信息动画分配*/
+    text-align: center;
+    animation: desc-group3 15s infinite;
+}
+.group-3 > li:nth-child(1) > span{ /*三组第一行添背景*/
+    background: url("../image/startInfo.png");
+    width: 92px;
+    height: 43px;
+}
+.group-3 > li:nth-child(2) > span{ /*三组第二行添背景*/
+    background: url("../image/fontAdd.png");
+    width: 108px;
+    height: 45px;
+}
+.group-3 > li:nth-child(3) > span{ /*三组第三行添背景*/
+    background: url("../image/fontLess.png");
+    width: 107px;
+    height: 45px;
+}
+.group-3 > li:nth-child(4) > span{ /*三组第四行添背景*/
+    background: url("../image/soundStart.png");
+    width: 92px;
+    height: 43px;
+}
+.group-3 > li:nth-child(5) > span{ /*三组第五行添背景*/
+    background: url("../image/soundClose.png");
+    width: 92px;
+    height: 43px;
+}
+
+@keyframes desc-group1{ /*第一组动画*/
+    0%{
+        transform: translateX(400px) rotate(360deg) scale(.1);
+    }
+    6.666666%,33.333333%{
+        transform: translateX(0) rotate(0deg) scale(1);
+    }
+    33.333334%,100%{
+        transform: scale(0);
+    }
+}
+@keyframes desc-group2 { /*第二组动画*/
+    0%,34.333334%{transform: translateY(-367px);}
+    36%{transform: translateY(0);}
+    36.666666%{transform: translateY(-22px);}
+    37%{transform: translateY(0);}
+    37.666666%{transform: translateY(-12px);}
+    38%{transform: translateY(0);}
+    38.222222%{transform: translateY(-6px);}
+    38.555555%{transform: translateY(0);}
+    38.555555%,66.666666%{transform: translateY(0);}
+    66.666667%,100%{transform: translateY(-367px);}
+}
+@keyframes desc-group3 { /*第三组动画*/
+    0%,66.6666667%{
+        transform: translateX(825px);
+    }
+    70%{
+        transform: translateX(0) skewX(-30deg);
+    }
+    73.333333%,100%{
+        transform: translateX(0) skewX(0deg);
+    }
+}
+
+.hide-desc{opacity: 0;}
+
+
+
+
+
+/**
+ *
+ *游戏界面*/
+.game-topArea{ /*上区域样式*/
+    height: 70px;
+    color: rgba(255,255,255,.7);
+    font-weight: bold;
+}
+
+.game-btn > span:after, .font-btn > span:after{ /*按钮文字居中*/
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    line-height: 45px;
+    text-align: center;
+}
+
+.game-info{
+    height: 100%;
+}
+.game-info > div{ /*游戏信息背景，文字样式*/
+    display: inline-block;
+    background: url("../image/icon1.png") left top no-repeat;
+    width: 160px;
+    height: 100%;
+    line-height: 60px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.game-topArea-btn{ /*功能按钮父级容器*/
+    height: 45px;
+    margin-top: 10px;
+}
+
+.game-btn > span{ /*功能按钮样式*/
+    display: inline-block;
+    position: relative;
+    background: url("../image/icon2.png") left top no-repeat;
+    width: 80px;
+    height: 45px;
+    margin-left: 12px;
+    cursor: pointer;
+}
+.game-btn > span:after { /*加字*/
+    content: attr(data-con);
+}
+
+.font-btn > span{ /*控制文字按钮样式*/
+    display: inline-block;
+    position: relative;
+    background: url("../image/icon3.png") left top no-repeat;
+    width: 80px;
+    height: 45px;
+    margin-right: 14px;
+    cursor: pointer;
+}
+.font-btn > span:after { /*文字样式*/
+    content: attr(data-con);
+    background: -webkit-linear-gradient(bottom,rgba(255, 241, 128, 1) ,rgba(204, 123, 0, 1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 14px;
+}
+
+.game-bottomArea{ /*下区域样式*/
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 115px;
+    margin-bottom: 20px;
+}
+
+.game-controller { /*控制器*/
+    position: relative;
+    overflow: hidden;
+    background: url("../image/controller.png");
+    height: 115px;
+    width: 115px;
+    margin-left: 20px;
+    border-radius: 50%;
+    vertical-align: bottom;
+}
+.game-controller ul li{ /*控制区li*/
+    position:absolute;
+    top: 0;right: 50%;
+    width: 115px;
+    height: 58px;
+    transform-origin: 100% 100%;
+}
+
+/*八面*/
+.sector1{transform: rotate(-22.5deg) skew(45deg); }
+.sector2{transform: rotate(22.5deg) skew(45deg); }
+.sector3{transform: rotate(67.5deg) skew(45deg); }
+.sector4{transform: rotate(112.5deg) skew(45deg); }
+.sector5{transform: rotate(157.5deg) skew(45deg); }
+.sector6{transform: rotate(202.5deg) skew(45deg); }
+.sector7{transform: rotate(247.5deg) skew(45deg); }
+.sector8{transform: rotate(292.5deg) skew(45deg); }
+.sector1:hover, .sector2:hover, .sector3:hover, .sector4:hover, .sector5:hover, .sector6:hover, .sector7:hover, .sector8:hover{background-color: yellowgreen; }
+
+.game-fuel{ /*燃油区域*/
+    margin-top: 40px;
+    margin-right: 40px;
+}
+.game-fuel > img{ /*清除间隙*/
+    vertical-align: bottom;
+}
+.desk-img{ /*燃油台图片*/
+    display: inline-block;
+    background: url("../image/icon4.png") left top no-repeat;
+    width: 230px;
+    line-height: 65px;
+    text-align: center;
+}
+.desk-img > p{ /*燃油台文字*/
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.game-over{ /*游戏结束界面*/
+    position: absolute;
+    top: 0;
+    background-color: rgba(0,0,0,.5);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    opacity: 1;
+    z-index: -2;
+}
+
+.end-title{ /*游戏结束标题*/
+    display: inline-block;
+    background: url("../image/gameOver.png");
+    width: 191px;
+    height: 76px;
+    margin-top: -30px;
+}
+.end-bg{ /*背景框*/
+    background: url("../image/overFram.png") ;
+    width: 443px;
+    height: 314px;
+    margin: calc(300px - 157px) auto;
+}
+.end-con{ /*输入区域*/
+    width: 230px;
+    margin: 50px auto;
+    box-sizing: border-box;
+}
+.name{ /*输入框*/
+    background: #323336;
+    color: #ffffff;
+    width: 100%;
+    height: 46px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    box-shadow: inset 0 0 10px rgba(0,0,0,.6);
+}
+.send{ /*提交按钮*/
+    background-image: linear-gradient(to bottom,#24242a ,#1a1a1e);
+    width: 100%;
+    height: 35px;
+    margin-top: 30px;
+    border-radius: 3px;
+    color: #e5d996;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 30px;
+    cursor: pointer;
+}
+.send:disabled{ /*不可选中文字颜色*/
+    color:#928a5c;
+}
+.send:active{ /*选中按钮*/
+    background-image: linear-gradient(to bottom,#1a1a1e ,#24242a);
+}
+
+.textGradient{ /*文字渐变*/
+    background: -webkit-linear-gradient(bottom,rgba(255, 241, 128, 1) ,rgba(204, 123, 0, 1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+
+
+
+/**
+ *
+ *排行榜*/
+.rank{ /*格式化*/
+    overflow: hidden;
+}
+.rank-title{ /*标题区域*/
+    height: 88px;
+    margin-top: 30px;
+    text-align: center;
+}
+.tit-font{ /*标题*/
+    display: inline-block;
+    background: url("../image/rankTit.png") no-repeat;
+    height: 100%;
+    width: 348px;
+    font-size: 28px;
+    line-height: 74px;
+}
+
+.rank-frame{ /*边框背景*/
+    overflow: hidden;
+    background: url("../image/rankFrame.png");
+    width: 645px;
+    height: 412px;
+    margin: 16px auto 0;
+}
+
+.table{ /*表格*/
+    position: relative;
+    width: 600px;
+    font-size: 20px;
+    text-align: center;
+}
+.table-area{ /*显示排行信息区域*/
+    overflow-y: auto;
+    max-width: 600px;
+    height: 200px;
+    margin: 5px auto;
+    box-sizing: border-box;
+}
+.table-area::-webkit-scrollbar{ /*隐藏滚动条*/
+    width: 0;
+}
+
+.rank-ol{
+    margin-top: 26px;
+    font-size: 0;
+    text-align: center;
+}
+.rank-ol li{  /*排行榜标题框*/
+    display: inline-block;
+    position: relative;
+    background-color: rgba(20,34,66,.6);
+    width: 150px;
+    height: 40px;
+    border-top: 2px solid #1d4798;
+    border-bottom: 2px solid #19365f;
+    font-size: 18px;
+    line-height: 40px;
+    text-shadow: 1px 2px 4px rgba(255,255,255,.7);
+}
+.rank-ol li:after{ /*排行榜标题细线*/
+    content: '';
+    position: absolute;
+    top: 0;left: 100%;
+    background-image:radial-gradient(rgba(3,4,9,1) ,rgba(3,4,9,0) 75%);
+    width: 1px;
+    height: 100%;
+    z-index: 1;
+}
+.rank-ol li:last-child:after{ /*隐藏*/
+    background: none;
+}
+.rank-ol li:before{ /*排行榜标题细线*/
+    content: '';
+    position: absolute;
+    top: 0;left: 1px;
+    background-image:radial-gradient(rgba(40,85,171,1) ,rgba(40,85,171,0) 75%);
+    width: 1px;
+    height: 100%;
+    z-index: 1;
+}
+.rank-ol li:first-child:before{ /*隐藏*/
+    background: none;
+}
+
+.table > tbody > tr > td{ /*表格td*/
+    width: 150px;
+    height: 40px;
+}
+.table > tbody > tr:nth-child(1) > td:first-child{
+    color: #209eff;
+}
+.table > tbody > tr:nth-child(2) > td:first-child{
+    color: #fffa68;
+}
+.table > tbody > tr:nth-child(3) > td:first-child{
+    color: #ff8972;
+}
+
+.table > tbody > tr:after{ /*分割线*/
+    content: '';
+    position: absolute;
+    left: 0;
+    background: radial-gradient(rgba(162,178,213,1), rgba(162,178,213,0) 65%);
+    width: 100%;
+    height: 1px;
+}
+.table > tbody > tr:first-child:after{ /*第一个分割线隐藏*/
+    background: none;
+}
+
+.rank-btn{ /*按钮区域*/
+    width: 166px;
+    height: 62px;
+    margin: 40px auto 0;
+    cursor: pointer;
+
+}
+.rank-btn > span{ /*按钮框，文字*/
+    display: inline-block;
+    position: relative;
+    background: url("../image/continue.png");
+    width: 100%;
+    height: 100%;
+    font-size: 22px;
+    line-height: 62px;
+    text-align: center;
+}
+.rank-btn > span > i{ /*按钮背景*/
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    background: rgba(48,107,230,.8);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.bg{
+    width:960px;
+    height:600px;
+    background: url("../image/bj.png");
+    position:absolute;
+    z-index: -3;
+}/*背景图片css*/
+#bg2{
+    left:960px;
+}/*背景图片2css*/
+#fj{
+    width:54px;
+    height:80px;
+    position: absolute;
+    z-index: -1;
+    background: url("../image/fj.png");
+}/*飞机css*/
+.bullet{
+    width: 42px;
+    height: 46px;
+    background: url("../image/bullet.png");
+    position: absolute;
+    left:-300px;
+    top:-300px;
+    z-index: -2;
+}/*子弹css*/
+.enemyAircraft{
+    width: 44px;
+    height:74px;
+    position: absolute;
+    background: url("../image/enemyAircraft.png");
+    left:-300px;
+    top:-300px;
+    z-index: -1;
+}/*敌方飞机css*/
+.asteroid{
+    width: 180px;
+    height: 68px;
+    background: url("../image/asteroid.png");
+    background-size:100%;
+    position: absolute;
+    left:-300px;
+    top:-300px;
+    z-index: -1;
+}/*小行星css*/
+.explosion{
+    width: 100px;
+    height: 100px;
+    background: url("../image/explosion.gif");
+    background-size: 100%;
+    position: absolute;
+    left: -300px;
+    top:-300px;
+    z-index: -1;
+}/*爆炸图片css*/
+.friends{
+    width: 50px;
+    height: 60px;
+    background: url("../image/friends.png");
+    position: absolute;
+    left: -300px;
+    top:-300px;
+    z-index: -1;
+}/*友军飞机css*/
+.fuel{
+    width: 40px;
+    height: 30px;
+    background: url("../image/yx.png");
+    position: absolute;
+    left: -300px;
+    top:-300px;
+    z-index: -1;
+}/*燃油图标css*/
+#fueldiv{
+    width:40px;
+    height:60px;
+    position: absolute;
+    background:blue;
+    left:630px;
+    top:50px;
+    z-index: -2;
+}/*燃油divcss*/
+#fuelimg{
+    z-index: -1;
+}/*燃油图片css*/
+.backgroundPlanets{
+    position :absolute;
+    top:-1000px;
+    left:-1000px;
+    z-index:-2;
+}/*背景行星集合css*/
+#planets1{
+    height:100px;
+    width: 100px;
+    background: url("../image/planet1.png");
+    background-size: 100%;
+}/*背景行星1css*/
+#planets2{
+    height:200px;
+    width: 200px;
+    background: url("../image/planet2.png");
+    background-size: 100%;
+}/*背景行星2css*/
+#planets3{
+    height:300px;
+    width: 300px;
+    background: url("../image/planet3.png");
+    background-size: 100%;
+}/*背景行星3css*/
+#planets4{
+    height:400px;
+    width: 400px;
+    background: url("../image/planet4.png");
+    background-size: 100%;
+}/*背景行星4css*/
+#planets5{
+    height:500px;
+    width: 500px;
+    background: url("../image/planet5.png");
+    background-size: 100%;
+}/*背景行星5css*/
+.Enemybullets{
+    width: 23px;
+    height:20px;
+    background:url(../image/emeyBullet.png);
+    position: absolute;
+    left:-300px;
+    top:-300px;
+    z-index: -2;
+}/*敌机子弹css*/
+.mp3{
+     position: absolute;
+     top: -300px;
+    left:-300px;
+}/*音乐CSS*/

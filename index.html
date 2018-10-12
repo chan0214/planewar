@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>星际之战</title>
+    <link rel="stylesheet" href="css/index.css" type="text/css">
+</head>
+<body>
+    <div class="box" id="box">
+        <div class="game-content">
+            <!--游戏介绍-->
+            <div id="desc" class="desc board showBoard">
+                <!--介绍框-->
+                <div class="desc-screen">
+                    <!--标题-->
+                    <div class="desc-title">游戏介绍</div>
+                    <!--第一组介绍内容-->
+                    <ol class="show-desc group-1 ">
+                        <li><span data-desc="玩家飞船：玩家控制的飞船，由鼠标触碰方向盘控制飞船移动，空格键发射子弹。"></span></li>
+                        <li><span data-desc="敌方飞船：会发射子弹，被击中或触碰减少15点燃料，玩家摧毁可获得5点分数。"></span></li>
+                        <li><span data-desc="友方飞船：玩家飞船触碰会爆炸并扣除15点燃料，击中会扣除10点分数。"></span></li>
+                    </ol>
+                    <!--第二组介绍内容-->
+                     <ol class="show-desc group-2 ">
+                         <li><span data-desc="计时器：没有时间限制，记录游戏时间。"></span></li>
+                         <li><span data-desc="补给燃油：控制飞船触碰可以添加15点燃料。"></span></li>
+                         <li><span data-desc="燃油柜台：这里显示飞船剩余燃料。"></span></li>
+                     </ol>
+                    <!--第三组介绍内容-->
+                    <ol class="show-desc group-3 ">
+                        <li><span data-desc="点击暂停/继续游戏，暂停时计时器将不会计时。"></span></li>
+                        <li><span data-desc="点击按钮画面字体变小。"></span></li>
+                        <li><span data-desc="点击按钮画面字体变大。"></span></li>
+                        <li><span data-desc="点击按钮开启游戏音效。"></span></li>
+                        <li><span data-desc="点击按钮关闭游戏音效。"></span></li>
+                    </ol>
+                </div>
+
+                <!--按钮-->
+                <div class="desc-btn">
+                    <span id="startGame">开始游戏</span>
+<!--                     <span id="gameRanking">排行榜</span> -->
+                    <i></i>
+                </div>
+            </div>
+
+            <!--游戏界面-->
+            <div id="playArea" class=" board ">
+                <!--上区域-->
+                <audio src="./music/background.mp3" controls="controls" id="bjmp3"  class="mp3"><!-- 背景音乐 -->
+                </audio>
+                <audio src="./music/destroyed.mp3"  id="gwmp3" class="mp3">
+                </audio><!-- 爆炸音乐 -->
+                <audio src="./music/shoot.mp3" id="zhidanmp3" class="mp3"></audio><!-- 子弹发射音乐 -->
+                <div class="bg" id="bg1"></div>
+                <div class="bg" id="bg2"></div>
+                <div id="fj"></div>
+                <div class="game-topArea clearfix">
+                    <!--游戏信息-->
+                    <div class="game-info fl">
+                        <div><p class="textGradient">时间 : 0s</p></div>
+                        <div><p class="textGradient">分数 : 0</p></div>
+                    </div>
+
+                    <!--游戏按钮-->
+                    <div class="game-topArea-btn">
+                        <div class="game-btn ">
+                            <span id="pauseBtn" data-con="暂停/继续"></span>
+                            <span id="soundOpen" data-con="声音开启"></span>
+                            <span id="soundClose" data-con="声音关闭"></span>
+
+                            <div class="font-btn  fr">
+                                <span id="fontAdd" data-con="字体大"></span>
+                                <span id="fontDel" data-con="字体小"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--下区域-->
+                <div class="game-bottomArea clearfix">
+                    <!--控制器-->
+                    <div class="game-controller fl">
+                        <ul>
+                            <li class="sector1"></li>
+                            <li class="sector2"></li>
+                            <li class="sector3"></li>
+                            <li class="sector4"></li>
+                            <li class="sector5"></li>
+                            <li class="sector6"></li>
+                            <li class="sector7"></li>
+                            <li class="sector8"></li>
+                        </ul>
+                    </div>
+
+                    <!--燃油台-->
+                    <div class="game-fuel fr">
+                             <img src="image/fuel.png" alt="" id="fuelimg">
+                        <div id="fueldiv"></div>
+                        <div class="desk-img"><p class="textGradient">剩余燃油为 : 15</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--游戏结束-->
+            <div id="over" class="game-over ">
+                <!--游戏结束背景框-->
+                <div class="end-bg">
+                    <!--标题-->
+                    <span class="end-title"></span>
+                    <!--输入区-->
+                    <div class="end-con">
+                        <label for=""><input type="text" class="name" id="name" placeholder="请输入您的名字"></label>
+                        <button id="Submit" class="send" disabled>提交</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--排行榜-->
+            <div id="rank" class="rank board">
+                <!--标题-->
+                <div class="rank-title">
+                    <span class="tit-font">排行榜</span>
+                </div>
+                <!--排行榜框-->
+                <div class="rank-frame">
+                    <!--排行榜信息标题-->
+                    <ol class="rank-ol">
+                        <li>名次</li>
+                        <li>玩家</li>
+                        <li>分数</li>
+                        <li>时间</li>
+                    </ol>
+                    <!--表格-->
+                    <div class="table-area">
+                        <!--数据模拟-->
+                        <table class="table" id="ta">
+                        </table>
+                    </div>
+                    <!--按钮-->
+                    <div class="rank-btn">
+                        <span id="carry">重新开始<i></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/gamefunction.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
+</body>
+</html>
